@@ -1,3 +1,6 @@
+# Uncomment this to include the Number Station Easter egg - only on 128k flash Blue Pills
+#NUMBER_STATION = 1
+
 PACKAGES       = peaks/test stmlib/utils peaks peaks/drums peaks/pulse_processor peaks/modulations peaks/number_station
 
 VPATH          = $(PACKAGES)
@@ -10,7 +13,6 @@ CC_FILES       = bass_drum.cc \
 		high_hat.cc \
 		lfo.cc \
 		multistage_envelope.cc \
-		number_station.cc \
 		peaks_test.cc \
 		processors.cc \
 		pulse_shaper.cc \
@@ -18,6 +20,11 @@ CC_FILES       = bass_drum.cc \
 		random.cc \
 		resources.cc \
 		snare_drum.cc
+
+ifdef $(NUMBER_STATION)
+CC_FILES       += number_station.cc
+endif
+
 OBJ_FILES      = $(CC_FILES:.cc=.o)
 OBJS           = $(patsubst %,$(BUILD_DIR)%,$(OBJ_FILES)) $(STARTUP_OBJ)
 DEPS           = $(OBJS:.o=.d)

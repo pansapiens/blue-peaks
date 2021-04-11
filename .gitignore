@@ -3,3 +3,5 @@ firmware/build/peaks/*.d
 firmware/build/peaks/*.mk
 
 *.pyc
+*.elf
+*.map

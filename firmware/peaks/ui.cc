@@ -177,6 +177,7 @@ inline void Ui::RefreshLeds() {
     }
   }
   
+  #ifdef NUMBER_STATION
   if (processors[0].function() == PROCESSOR_FUNCTION_NUMBER_STATION) {
     leds_.set_pattern(
         processors[0].number_station().digit() ^ \
@@ -184,6 +185,7 @@ inline void Ui::RefreshLeds() {
     b[0] = processors[0].number_station().gate() ? 255 : 0;
     b[1] = processors[1].number_station().gate() ? 255 : 0;
   }
+  #endif
   
   leds_.set_levels(b[0], b[1]);
 }
@@ -222,8 +224,10 @@ void Ui::Poll() {
           press_time_[0] = press_time_[1] = 0;
           if (double_press_counter_ == 3) {
             double_press_counter_ = 0;
+            #ifdef NUMBER_STATION
             processors[0].set_function(PROCESSOR_FUNCTION_NUMBER_STATION);
             processors[1].set_function(PROCESSOR_FUNCTION_NUMBER_STATION);
+            #endif
           }
         } else {
           queue_.AddEvent(CONTROL_SWITCH, i, pressed_time);

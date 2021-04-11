@@ -54,7 +54,9 @@ Processors::callbacks_table_[PROCESSOR_FUNCTION_LAST] = {
   REGISTER_PROCESSOR(PulseRandomizer)
   REGISTER_PROCESSOR(BouncingBall)
   REGISTER_PROCESSOR(MiniSequencer)
+  #ifdef NUMBER_STATION
   REGISTER_PROCESSOR(NumberStation)
+  #endif
 };
 
 void Processors::Init(uint8_t index) {
@@ -73,8 +75,10 @@ void Processors::Init(uint8_t index) {
   pulse_shaper_.Init();
   pulse_randomizer_.Init();
   mini_sequencer_.Init();
+  #ifdef NUMBER_STATION
   number_station_.Init();
   number_station_.set_voice(index == 1);
+  #endif
   
   control_mode_ = CONTROL_MODE_FULL;
   set_function(PROCESSOR_FUNCTION_ENVELOPE);

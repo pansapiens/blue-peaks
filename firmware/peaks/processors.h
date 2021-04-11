@@ -41,7 +41,9 @@
 #include "peaks/modulations/lfo.h"
 #include "peaks/modulations/mini_sequencer.h"
 #include "peaks/modulations/multistage_envelope.h"
+#ifdef NUMBER_STATION
 #include "peaks/number_station/number_station.h"
+#endif
 #include "peaks/pulse_processor/pulse_shaper.h"
 #include "peaks/pulse_processor/pulse_randomizer.h"
 
@@ -61,7 +63,9 @@ enum ProcessorFunction {
   PROCESSOR_FUNCTION_PULSE_RANDOMIZER,
   PROCESSOR_FUNCTION_BOUNCING_BALL,
   PROCESSOR_FUNCTION_MINI_SEQUENCER,
+  #ifdef NUMBER_STATION
   PROCESSOR_FUNCTION_NUMBER_STATION,
+  #endif
   PROCESSOR_FUNCTION_LAST
 };
 
@@ -124,7 +128,9 @@ class Processors {
     (this->*callbacks_.process_fn)(gate_flags, output, size);
   }
   
+  #ifdef NUMBER_STATION
   inline const NumberStation& number_station() const { return number_station_; }
+  #endif
   
  private:
   void Configure() {
@@ -164,7 +170,9 @@ class Processors {
   DECLARE_PROCESSOR(PulseRandomizer, pulse_randomizer_);
   DECLARE_PROCESSOR(BouncingBall, bouncing_ball_);
   DECLARE_PROCESSOR(MiniSequencer, mini_sequencer_);
+  #ifdef NUMBER_STATION
   DECLARE_PROCESSOR(NumberStation, number_station_);
+  #endif
   
   DISALLOW_COPY_AND_ASSIGN(Processors);
 };
