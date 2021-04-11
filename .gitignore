@@ -1,0 +1,5 @@
+firmware/build/peaks/*.o
+firmware/build/peaks/*.d
+firmware/build/peaks/*.mk
+
+*.pyc
