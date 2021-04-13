@@ -57,8 +57,10 @@ Processors::callbacks_table_[PROCESSOR_FUNCTION_LAST] = {
   REGISTER_PROCESSOR(PulseShaper)
   REGISTER_PROCESSOR(PulseRandomizer)
   REGISTER_PROCESSOR(MiniSequencer)
-  REGISTER_PROCESSOR(NumberStation)
   REGISTER_PROCESSOR(ByteBeats)
+#ifdef NUMBER_STATION
+  REGISTER_PROCESSOR(NumberStation)
+#endif
   REGISTER_PROCESSOR(DualAttackEnvelope)
   REGISTER_PROCESSOR(RepeatingAttackEnvelope)
   REGISTER_PROCESSOR(LoopingEnvelope)
@@ -92,9 +94,11 @@ void Processors::Init(uint8_t index) {
   pulse_shaper_.Init();
   pulse_randomizer_.Init();
   mini_sequencer_.Init();
+  bytebeats_.Init();
+  #ifdef NUMBER_STATION
   number_station_.Init();
   number_station_.set_voice(index == 1);
-  bytebeats_.Init();
+  #endif
   turing_machine_.Init();
   dual_attack_envelope_.Init();
   looping_envelope_.Init();

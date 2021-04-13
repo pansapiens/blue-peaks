@@ -26,7 +26,7 @@
 //
 // Byte beats
 
-#include "peaks2/number_station/bytebeats.h"
+#include "peaks2/bytebeats/bytebeats.h"
 
 #include "stmlib/utils/dsp.h"
 #include "stmlib/utils/random.h"

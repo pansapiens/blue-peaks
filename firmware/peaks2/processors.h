@@ -46,10 +46,12 @@
 #include "peaks2/modulations/mini_sequencer.h"
 #include "peaks2/modulations/turing_machine.h"
 #include "peaks2/modulations/multistage_envelope.h"
+#ifdef NUMBER_STATION
 #include "peaks2/number_station/number_station.h"
+#endif
 #include "peaks2/pulse_processor/pulse_shaper.h"
 #include "peaks2/pulse_processor/pulse_randomizer.h"
-#include "peaks2/number_station/bytebeats.h"
+#include "peaks2/bytebeats/bytebeats.h"
 
 #include "peaks2/gate_processor.h"
 
@@ -66,8 +68,10 @@ enum ProcessorFunction {
   PROCESSOR_FUNCTION_PULSE_SHAPER,
   PROCESSOR_FUNCTION_PULSE_RANDOMIZER,
   PROCESSOR_FUNCTION_MINI_SEQUENCER,
-  PROCESSOR_FUNCTION_NUMBER_STATION,
   PROCESSOR_FUNCTION_BYTEBEATS,
+  #ifdef NUMBER_STATION
+  PROCESSOR_FUNCTION_NUMBER_STATION,
+  #endif
   PROCESSOR_FUNCTION_DUAL_ATTACK_ENVELOPE,
   PROCESSOR_FUNCTION_REPEATING_ATTACK_ENVELOPE,
   PROCESSOR_FUNCTION_LOOPING_ENVELOPE,
@@ -148,7 +152,9 @@ class Processors {
     (this->*callbacks_.process_fn)(gate_flags, output, size);
   }
 
+#ifdef NUMBER_STATION
   inline const NumberStation& number_station() const { return number_station_; }
+#endif
 
  private:
   void Configure() {
@@ -172,8 +178,10 @@ class Processors {
   DECLARE_PROCESSOR(PulseRandomizer, pulse_randomizer_);
   DECLARE_PROCESSOR(BouncingBall, bouncing_ball_);
   DECLARE_PROCESSOR(MiniSequencer, mini_sequencer_);
-  DECLARE_PROCESSOR(NumberStation, number_station_);
   DECLARE_PROCESSOR(ByteBeats, bytebeats_);
+#ifdef NUMBER_STATION
+  DECLARE_PROCESSOR(NumberStation, number_station_);
+#endif
   DECLARE_PROCESSOR(DualAttackEnvelope, dual_attack_envelope_);
   DECLARE_PROCESSOR(LoopingEnvelope, looping_envelope_);
   DECLARE_PROCESSOR(RepeatingAttackEnvelope, repeating_attack_envelope_);

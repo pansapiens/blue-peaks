@@ -37,16 +37,32 @@ BOOTLOADER     = peaks_bootloader
 # Preferred upload command
 UPLOAD_COMMAND  = upload_combo_jtag
 
+# Uncomment this to include the Number Station Easter egg - only on 128k flash Blue Pills
+#NUMBER_STATION = 1
+
+# For Ubuntu 20.04 with: sudo apt install gcc-arm*
+#TOOLCHAIN_PATH = /usr/
+
+PROJECT_CONFIGURATION =
+ifdef $(NUMBER_STATION)
+PROJECT_CONFIGURATION += -DNUMBER_STATION
+endif
+
 # Packages to build
 TARGET         = peaks2
 PACKAGES       = peaks2 \
 		peaks2/drivers \
 		peaks2/drums \
 		peaks2/modulations \
-		peaks2/number_station \
 		peaks2/pulse_processor \
+		peaks2/bytebeats \
 		stmlib/utils \
 		stmlib/system
+
+ifdef $(NUMBER_STATION)
+PACKAGES += peaks/number_station 
+endif
+
 RESOURCES      = peaks2/resources
 
 TOOLCHAIN_PATH ?= /usr/local/arm-4.8.3/
@@ -55,6 +71,6 @@ include stmlib/makefile.inc
 
 # Rule for building the firmware update file
 wav:  $(TARGET_BIN)
-	python stm_audio_bootloader/fsk/encoder.py \
+	python2 stm_audio_bootloader/fsk/encoder.py \
 		-s 48000 -b 16 -n 8 -z 4 -p 256 \
 		$(TARGET_BIN)

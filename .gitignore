@@ -1,6 +1,9 @@
 firmware/build/peaks/*.o
 firmware/build/peaks/*.d
 firmware/build/peaks/*.mk
+firmware/build/peaks2/*.o
+firmware/build/peaks2/*.d
+firmware/build/peaks2/*.mk
 
 *.pyc
 *.elf
