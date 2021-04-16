@@ -8,3 +8,4 @@ firmware/build/peaks2/*.mk
 *.pyc
 *.elf
 *.map
+*.*-bak
