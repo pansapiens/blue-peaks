@@ -42,7 +42,11 @@ class Adc {
   
   void Init();
   
+  #ifdef REVERSE_POTS
+  inline uint16_t value(uint8_t channel) const { return UINT16_MAX - values_[channel]; }
+  #else
   inline uint16_t value(uint8_t channel) const { return values_[channel]; }
+  #endif
  
  private:
   uint16_t values_[kNumAdcChannels];

@@ -40,12 +40,20 @@ UPLOAD_COMMAND  = upload_combo_jtag
 # Uncomment this to include the Number Station Easter egg - only on 128k flash Blue Pills
 #NUMBER_STATION = 1
 
+# Uncomment to reverse the direction of the pots (eg, if they were mounted with the pins flipped)
+REVERSE_POTS = 1
+
 # For Ubuntu 20.04 with: sudo apt install gcc-arm*
 #TOOLCHAIN_PATH = /usr/
 
 PROJECT_CONFIGURATION =
-ifdef $(NUMBER_STATION)
-PROJECT_CONFIGURATION += -DNUMBER_STATION
+
+ifdef NUMBER_STATION
+PROJECT_CONFIGURATION += -DNUMBER_STATION=1
+endif
+
+ifdef REVERSE_POTS
+PROJECT_CONFIGURATION += -DREVERSE_POTS=1
 endif
 
 # Packages to build
@@ -58,7 +66,7 @@ PACKAGES       = peaks \
 		stmlib/utils \
 		stmlib/system
 
-ifdef $(NUMBER_STATION)
+ifdef NUMBER_STATION
 PACKAGES += peaks/number_station 
 endif
 
