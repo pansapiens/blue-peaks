@@ -43,8 +43,11 @@ UPLOAD_COMMAND  = upload_combo_jtag
 # Uncomment to reverse the direction of the pots (eg, if they were mounted with the pins flipped)
 REVERSE_POTS = 1
 
+# Uncomment if pots are wired in the reverse order (reverse the order of the ADCs)
+REVERSE_POT_ORDER = 1
+
 # For Ubuntu 20.04 with: sudo apt install gcc-arm*
-#TOOLCHAIN_PATH = /usr/
+# TOOLCHAIN_PATH = /usr/
 
 PROJECT_CONFIGURATION =
 
@@ -54,6 +57,10 @@ endif
 
 ifdef REVERSE_POTS
 PROJECT_CONFIGURATION += -DREVERSE_POTS=1
+endif
+
+ifdef REVERSE_POT_ORDER
+PROJECT_CONFIGURATION += -DREVERSE_POT_ORDER=1
 endif
 
 # Packages to build
